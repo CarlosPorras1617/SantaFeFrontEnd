@@ -1,0 +1,26 @@
+:root{
+    --color-icons-inactive: #ba9695;
+    --color-icons-active: #752E2B;
+}
+
+img {
+    position: absolute;
+    top: -20px;
+    height: 8rem;
+}
+
+nav{
+    height: 5rem;
+}
+
+.material-icons{
+    color: var(--color-icons-inactive);
+    font-size: 3rem !important;
+    margin-top: 1rem;
+}
+
+.material-icons:hover{
+    color: var(--color-icons-active);
+    background-color: transparent;
+}
+

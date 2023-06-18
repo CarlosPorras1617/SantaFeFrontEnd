@@ -1,0 +1,37 @@
+.contenedorChofer{
+    /*position fixed hace que se mueva imagen con fondo al hacer scroll*/
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.imagenChofer{
+    margin-top: 1.55rem;
+    position: relative;
+    width: 100%;
+    /*Preguntar si en en 100% u 80%*/
+    height: 90%;
+    object-fit: cover;
+}
+
+.bienvenido{
+    right: 2rem;
+    top: 21rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-weight: bold;
+    font-size: 100px;
+    z-index: 3;
+    position: relative;
+}
+
+.contenidoHome{
+    position: relative;
+    background-color: white;
+    /*vh para que no aumente o disminuya de tamaño conforme a la resolución de la pantalla*/
+    top: 90vh;
+    z-index: 3;
+}

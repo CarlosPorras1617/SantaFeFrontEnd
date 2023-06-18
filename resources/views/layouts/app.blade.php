@@ -18,6 +18,9 @@
     <!--css navbar-->
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 
+    <!--css HomePage-->
+    <link rel="stylesheet" href="{{ asset('css/homePage.css') }}">
+
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -29,7 +32,10 @@
     <div>
         <aside id="fh5co-aside" role="complementary" class="js-fullheight bg-warning">
             <nav class="white">
-                <div class="nav-wrapper">
+                <div class="nav-wrapper center">
+                <div class="contenedorTriagulo">
+                    <div class="triangulo"></div>
+                </div>
                   <img class="brand-logo center" src="{{asset('images/AgenciaSantaFeLogo.png')}}">
                   <ul class="right hide-on-med-and-down list">
                     <li><a  class="large material-icons">local_shipping</a></li>

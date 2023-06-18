@@ -11,6 +11,7 @@ img {
 
 nav{
     height: 5rem;
+    box-shadow: none !important;
 }
 
 .material-icons{
@@ -23,4 +24,23 @@ nav{
     color: var(--color-icons-active);
     background-color: transparent;
 }
+
+.contenedorTriagulo{
+    position: absolute;
+    top: 6.5rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.triangulo {
+    transform: scaleY(-1);
+    width: 0;
+    height: 0;
+    border-left: 3rem solid transparent;
+    border-right: 3rem solid transparent;
+    border-bottom: 3rem solid white;
+
+}
+
 

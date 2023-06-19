@@ -23,8 +23,6 @@
 
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
     @livewireStyles
 </head>
 
@@ -37,12 +35,14 @@
                     <div class="triangulo"></div>
                 </div>
                   <img class="brand-logo center" src="{{asset('images/AgenciaSantaFeLogo.png')}}">
+                  <div class="contenedor">
                   <ul class="right hide-on-med-and-down list">
                     <li><a  class="large material-icons">local_shipping</a></li>
                     <li><a  class="large material-icons">assignment</a></li>
                     <li><a  class="large material-icons">people</a></li>
                     <li><a  class="large material-icons">add</a></li>
                   </ul>
+                </div>
                 </div>
               </nav>
 
@@ -56,7 +56,14 @@
             <aside class="container">
                 {{$slot}}
             </aside>
-    @livewireScripts
-</body>
 
+    @livewireScripts
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          $('input#numero').characterCounter();
+        });
+    </script>
+</body>
 </html>

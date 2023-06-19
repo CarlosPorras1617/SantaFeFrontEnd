@@ -1,3 +1,8 @@
+:root{
+    --color-icons-inactive: #ba9695;
+    --color-titulos: #752E2B;
+}
+
 .contenedorChofer{
     /*position fixed hace que se mueva imagen con fondo al hacer scroll*/
     position: absolute;
@@ -23,15 +28,64 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     color: white;
     font-weight: bold;
-    font-size: 100px;
+    font-size: 90px;
     z-index: 3;
     position: relative;
 }
 
 .contenidoHome{
-    position: relative;
+    position: absolute;
     background-color: white;
     /*vh para que no aumente o disminuya de tamaño conforme a la resolución de la pantalla*/
-    top: 90vh;
+    top: 100vh;
     z-index: 3;
+    width: 100%;
+    left: 0;
+}
+
+.titulos{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 60px;
+    font-weight: bold;
+    color: var(--color-titulos);
+}
+
+.subtitulos{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    color: var(--color-titulos);
+    margin-top: 0;
+}
+.cards{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.card{
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: scale(1.1);
+}
+.card-image{
+    height: 20rem;
+    object-fit: cover;
+}
+.textos{
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.container{
+    width: 50vw;
+}
+.input-field input[type=number]:focus + label {
+    color: var(--color-titulos) !important;
+}
+.input-field input[type=number]:focus {
+    border-bottom: 1px solid var(--color-titulos) !important;
+    box-shadow: 0 1px 0 0 var(--color-titulos) !important;
+}
+.page-footer{
+    margin-top: 3vw;
+    background-color: var(--color-titulos);
 }

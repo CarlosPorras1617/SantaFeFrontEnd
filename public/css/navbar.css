@@ -15,6 +15,7 @@ nav{
 }
 
 .material-icons{
+    transition: transform 0.3s;
     color: var(--color-icons-inactive);
     font-size: 3rem !important;
     margin-top: 1rem;
@@ -23,8 +24,11 @@ nav{
 .material-icons:hover{
     color: var(--color-icons-active);
     background-color: transparent;
+    transform: scale(1.5);
 }
-
+.contenedor{
+    margin-right: 2rem;
+}
 .contenedorTriagulo{
     position: absolute;
     top: 6.5rem;

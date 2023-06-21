@@ -20,6 +20,8 @@
 
     <!--css HomePage-->
     <link rel="stylesheet" href="{{ asset('css/homePage.css') }}">
+    <!--css HomePage-->
+    <link rel="stylesheet" href="{{ asset('css/clientes.css') }}">
 
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -39,7 +41,7 @@
                   <ul class="right hide-on-med-and-down list">
                     <li><a  class="large material-icons">local_shipping</a></li>
                     <li><a  class="large material-icons">assignment</a></li>
-                    <li><a  class="large material-icons">people</a></li>
+                    <li><a  class="large material-icons" href="clientes">people</a></li>
                     <li><a  class="large material-icons">add</a></li>
                   </ul>
                 </div>

@@ -31,7 +31,7 @@ nav{
 }
 .contenedorTriagulo{
     position: absolute;
-    top: 6.5rem;
+    top: 6.4rem;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -45,6 +45,10 @@ nav{
     border-right: 3rem solid transparent;
     border-bottom: 3rem solid white;
 
+}
+.btn.btn-flat:hover{
+    background-color: transparent;
+    color: inherit;
 }
 
 

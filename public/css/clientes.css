@@ -1,0 +1,21 @@
+:root{
+    --color-icons-inactive: #ba9695;
+    --color-fondo: #752E2B;
+}
+.fondo{
+    background: var(--color-fondo);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1;
+}
+.contenedorClientes{
+    position: relative;
+    top: 100px;
+    z-index: 10;
+}
+.table{
+    height: 35vw;
+}

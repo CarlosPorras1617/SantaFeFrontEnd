@@ -1,6 +1,9 @@
 :root{
     --color-icons-inactive: #ba9695;
     --color-fondo: #752E2B;
+    --color-paginate-active:#E4DDDD;
+    --color-paginate-inactive: #AD7A78;
+    --color-rows-tablas:#DDC4C4;
 }
 .fondo{
     background: var(--color-fondo);
@@ -13,9 +16,48 @@
 }
 .contenedorClientes{
     position: relative;
-    top: 100px;
+    top: 90px;
     z-index: 10;
 }
 .table{
     height: 35vw;
 }
+li.active a{
+    background-color: var(--color-paginate-active);
+}
+li:not(.active) a.paginado{
+    background-color: var(--color-paginate-inactive);
+}
+ul li a.paginado{
+    font-weight: bold;
+}
+ul li a:hover.paginado{
+    background-color: white;
+}
+table tr:nth-child(even) {
+    background-color: var(--color-rows-tablas) /* Color para las filas pares */
+}
+
+table tr:nth-child(odd) {
+    background-color: #ffffff; /* Color para las filas impares */
+}
+.clienteForm{
+    border-radius: 10px;
+    background-color: white;
+    height: 40rem;
+    width: 40rem;
+}
+.containerForm{
+    width: 50px;
+}
+.campos{
+    margin: 50px;
+}
+.input-field input[type=text]:focus + label {
+    color: var(--color-titulos) !important;
+}
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid var(--color-titulos) !important;
+    box-shadow: 0 1px 0 0 var(--color-titulos) !important;
+}
+

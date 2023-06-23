@@ -9,7 +9,7 @@ class Clientes extends Component
     public $currentPage = 1;
     public $idClient;
     public $dataCreateClient = [];
-    public $errors =  [];
+    public $APIerrors =  [];
 
     public function render()
     {
@@ -25,19 +25,29 @@ class Clientes extends Component
         $currentpage = $clients['current_page'];
         return view('livewire.clientes', compact('clients', 'totalClients', 'currentpage'));
     }
-    public function nextsPages($i)
-    {
+
+    public function nextsPages($i){
         //si mandamos la pagina nueva, cargara de nuevo la funcion render y renderizara la tabla en base a la nueva pagina
         $this->currentPage = $i;
     }
+
     public function deleteClient($id){
         $this->idClient = $id;
         $response = Http::delete('http://127.0.0.1:8000/api/clientes/eliminar/'.$this->idClient);
         if (!$response->successful()) {
 
         }else{
-            $this->errors = $response->json();
+            $this->APIerrors = $response->json();
             redirect('/clientes');
+        }
+    }
+
+    public function createClient(){
+        $response = Http::withHeaders(['Accept' => 'Application/json'])->post('http://127.0.0.1:8000/api/clientes', $this->dataCreateClient);
+        if ($response->successful()) {
+            $this->dataCreateClient = [];
+        }else{
+            $this->APIerrors = $response->json();
         }
     }
 }

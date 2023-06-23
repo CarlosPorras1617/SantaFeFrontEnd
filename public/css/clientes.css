@@ -16,7 +16,7 @@
 }
 .contenedorClientes{
     position: relative;
-    top: 90px;
+    top: 85px;
     z-index: 10;
 }
 .table{
@@ -60,4 +60,33 @@ table tr:nth-child(odd) {
     border-bottom: 1px solid var(--color-titulos) !important;
     box-shadow: 0 1px 0 0 var(--color-titulos) !important;
 }
+.clienteFormButton{
+    transition: transform 0.3s;
+    background-color: var(--color-paginate-inactive);
+    color: inherit;
+    color: white;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.clienteFormButton:hover{
+    transform: scale(1.5);
+    background-color: var(--color-fondo);
+    color: inherit;
+    color: white;
+    font-weight: bold;
+}
+.clientesFormButtonsRow{
+    display: flex;
+    justify-content: space-between;
+}
+.floatingActionButton{
+    margin-top: 20px;
+}
+.medium.material-icons.home:hover{
+    color: white;
+}
+.divider{
+    margin: 40px;
+}
+
 

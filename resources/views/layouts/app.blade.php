@@ -71,5 +71,10 @@
           $('input#numero').characterCounter();
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            M.updateTextFields();
+        });
+    </script>
 </body>
 </html>

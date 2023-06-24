@@ -84,7 +84,7 @@
                 <div class="col s10 m10 l10">
                     <form>
                         <div class="input-field col s8 cards ">
-                            <input type="number" id="numero" data-length="10">
+                            <input type="number" id="numero" data-length="11">
                             <label for="icon_prefix2">Numero de Entrada</label>
                         </div>
                         <i class="material-icons prefix">search</i>

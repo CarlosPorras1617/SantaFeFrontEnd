@@ -8,8 +8,10 @@ class Clientes extends Component
     //cualquier cambio de variable en esta parte, ejecuta la funcion de render y se actualzian los datos
     public $currentPage = 1;
     public $idClient;
-    public $dataCreateClient = [];
+    public $clientToUpdate = [];
+    public $dataClient = [];
     public $APIerrors =  [];
+
 
     public function render()
     {
@@ -43,11 +45,32 @@ class Clientes extends Component
     }
 
     public function createClient(){
-        $response = Http::withHeaders(['Accept' => 'Application/json'])->post('http://127.0.0.1:8000/api/clientes', $this->dataCreateClient);
+        $response = Http::withHeaders(['Accept' => 'Application/json'])->post('http://127.0.0.1:8000/api/clientes', $this->dataClient);
         if ($response->successful()) {
-            $this->dataCreateClient = [];
+            $this->dataClient = [];
+            $this->clientToUpdate = [];
         }else{
             $this->APIerrors = $response->json();
         }
+    }
+
+    public function getClient($id){
+        //get client
+        $response = Http::get('http://127.0.0.1:8000/api/cliente/' . $id);
+        $client = $response->json();
+        $this->clientToUpdate = $client;
+    }
+
+    public function updateClient($id){
+        $response = Http::withHeaders(['Accept'=>'Application/json'])->put('http://127.0.0.1:8000/api/cliente/'.$id, $this->dataClient);
+       if ($response->successful()) {
+            $this->dataClient = [];
+        }else {
+            $this->APIerrors = $response->json();
+        }
+    }
+
+    public function cancelUpdate(){
+        $this->clientToUpdate = [];
     }
 }

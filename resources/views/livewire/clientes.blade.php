@@ -29,13 +29,16 @@
                                         <td>{{ $client['id'] }}</td>
                                         <td>{{ $client['nombre'] }}</td>
                                         <td>{{ $client['rfc'] }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($client['created_at'], 'America/Hermosillo')->format('d/m/y') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($client['updated_at'], 'America/Hermosillo')->format('d/m/y') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($client['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                        </td>
+                                        <td>{{ \Carbon\Carbon::parse($client['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                        </td>
                                         <td style="display: flex">
-                                            <a class="btn btn-flat" style="margin: auto"><i
+                                            <a class="btn btn-flat" style="margin: auto"
+                                                wire:click='getClient({{ $client['id'] }})'><i
                                                     class="large material-icons">create</i></a>
                                             <a class="btn btn-flat" style="margin: auto"
-                                                wire:click='deleteClient({{ $client['id'] }})'"><i
+                                                wire:click='deleteClient({{ $client['id'] }})'><i
                                                     class="large material-icons">delete</i> </button>
                                         </td>
                                         </tr>
@@ -70,21 +73,27 @@
                         <div class="clienteForm center">
                             <h3 class="subtitulos">CLIENTE</h3>
                             <div class="input-field campos">
-                                <label for="nombre">Nombre</label>
-                                <input wire:model='dataCreateClient.nombre' id="nombre" value=" "
-                                    type="text">
+                                <label class="active" for="nombre">{{$clientToUpdate ? $clientToUpdate['nombre'] : 'Nombre'}}</label>
+                                <input wire:model='dataClient.nombre' id="nombre" type="text">
                             </div>
                             <div class="input-field campos">
-                                <label for="rfc">RFC</label>
-                                <input wire:model='dataCreateClient.rfc' id="rfc" value=" " type="text">
+                                <input wire:model='dataClient.rfc' id="rfc" type="text" value="{{$clientToUpdate ? $clientToUpdate['rfc'] : ' '}}" >
+                                <label class="active" for="rfc">{{$clientToUpdate ? $clientToUpdate['rfc'] : 'RFC'}}</label>
                             </div>
                             <div class="clientesFormButtonRow">
                                 <a wire:click='createClient' class="btn clienteFormButton">CREAR</a>
-                                <a class="btn clienteFormButton">ACTUALIZAR</a>
+                                @if ($clientToUpdate)
+                                <a wire:click='updateClient({{$clientToUpdate['id']}})' class="btn clienteFormButton">ACTUALIZAR</a>
+                                @endif
                             </div>
                             @if (array_key_exists('message', $APIerrors))
                                 <div class="divider"></div>
                                 <p class="subtitulos">{{ $APIerrors['message'] }}</p>
+                            @endif
+                            @if ($clientToUpdate)
+                                <br>
+                                <a class="btn btn-flat" wire:click='cancelUpdate()'><i class="tiny material-icons home">do_not_disturb</i></a>
+                                <p class="textos">Cancelar</p>
                             @endif
                         </div>
                         <div class="floatingActionButton right">

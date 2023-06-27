@@ -3,7 +3,6 @@
         <div class="contenedorClientes">
             <div class="row right">
                 <div class="col s12 m12 l12">
-                    <h1>Barra busqueda</h1>
                 </div>
             </div>
             <div class="row center">
@@ -24,27 +23,49 @@
                             </thead>
                             <tbody>
                                 <!-- for each para los usuarios -->
-                                @foreach ($clients['data'] as $client)
-                                    <tr">
-                                        <td>{{ $client['id'] }}</td>
-                                        <td>{{ $client['nombre'] }}</td>
-                                        <td>{{ $client['rfc'] }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($client['created_at'], 'America/Hermosillo')->format('d/m/y') }}
-                                        </td>
-                                        <td>{{ \Carbon\Carbon::parse($client['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
-                                        </td>
-                                        <td style="display: flex">
-                                            <a class="btn btn-flat" style="margin: auto"
-                                                wire:click='getClient({{ $client['id'] }})'><i
-                                                    class="large material-icons">create</i></a>
-                                            <a class="btn btn-flat" style="margin: auto"
-                                                wire:click='deleteClient({{ $client['id'] }})'><i
-                                                    class="large material-icons">delete</i> </button>
-                                        </td>
+                                @if (empty($nombreEmpresa))
+                                    @foreach ($clients['data'] as $client)
+                                        <tr>
+                                            <td>{{ $client['id'] }}</td>
+                                            <td>{{ $client['nombre'] }}</td>
+                                            <td>{{ $client['rfc'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($client['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            </td>
+                                            <td>{{ \Carbon\Carbon::parse($client['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            </td>
+                                            <td style="display: flex">
+                                                <a class="btn btn-flat" style="margin: auto"
+                                                    wire:click='getClient({{ $client['id'] }})'><i
+                                                        class="large material-icons">create</i></a>
+                                                <a class="btn btn-flat" style="margin: auto"
+                                                    wire:click='deleteClient({{ $client['id'] }})'><i
+                                                        class="large material-icons">delete</i> </button>
+                                            </td>
                                         </tr>
-                                @endforeach
-                                <br>
-                                <br>
+                                    @endforeach
+                                @else
+                                    @foreach ($clientsFound['data'] as $client)
+                                        <tr>
+                                            <td>{{ $client['id'] }}</td>
+                                            <td>{{ $client['nombre'] }}</td>
+                                            <td>{{ $client['rfc'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($client['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            </td>
+                                            <td>{{ \Carbon\Carbon::parse($client['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            </td>
+                                            <td style="display: flex">
+                                                <a class="btn btn-flat" style="margin: auto"
+                                                    wire:click='getClient({{ $client['id'] }})'><i
+                                                        class="large material-icons">create</i></a>
+                                                <a class="btn btn-flat" style="margin: auto"
+                                                    wire:click='deleteClient({{ $client['id'] }})'><i
+                                                        class="large material-icons">delete</i> </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <br>
+                                    <br>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -64,36 +85,43 @@
                         @endfor
                     </ul>
 
-                    </ul>
-
 
                 </div>
                 <div class="col s12 m12 l4">
                     <form wire:submit.prevent='createClient'>
                         <div class="clienteForm center">
+                            <br>
+                            <!---BARRA BUSQUEDA-->
+                            <div class="input-field campos">
+                                <i class="material-icons prefix">search</i>
+                                <input type="text" wire:model='nombreEmpresa' id="buscar">
+                                <label for="buscar" class="active">Buscar por nombre</label>
+                            </div>
                             <h3 class="subtitulos">CLIENTE</h3>
                             <div class="input-field campos">
-                                <label class="active" for="nombre">{{$clientToUpdate ? $clientToUpdate['nombre'] : 'Nombre'}}</label>
+                                <label class="active"
+                                    for="nombre">{{ $clientToUpdate ? $clientToUpdate['nombre'] : 'Nombre' }}</label>
                                 <input wire:model='dataClient.nombre' id="nombre" type="text">
                             </div>
                             <div class="input-field campos">
-                                <input wire:model='dataClient.rfc' id="rfc" type="text" value="{{$clientToUpdate ? $clientToUpdate['rfc'] : ' '}}" >
-                                <label class="active" for="rfc">{{$clientToUpdate ? $clientToUpdate['rfc'] : 'RFC'}}</label>
+                                <input wire:model='dataClient.rfc' id="rfc" type="text"
+                                    value="{{ $clientToUpdate ? $clientToUpdate['rfc'] : ' ' }}">
+                                <label class="active"
+                                    for="rfc">{{ $clientToUpdate ? $clientToUpdate['rfc'] : 'RFC' }}</label>
                             </div>
                             <div class="clientesFormButtonRow">
+                                <!--CREAR CLIENTE-->
                                 <a wire:click='createClient' class="btn clienteFormButton">CREAR</a>
                                 @if ($clientToUpdate)
-                                <a wire:click='updateClient({{$clientToUpdate['id']}})' class="btn clienteFormButton">ACTUALIZAR</a>
+                                    <a wire:click='updateClient({{ $clientToUpdate['id'] }})'
+                                        class="btn clienteFormButton">ACTUALIZAR</a>
+                                    <a class="btn btn-flat" wire:click='cancelUpdate()'><i
+                                            class="tiny material-icons home">do_not_disturb</i></a>
                                 @endif
                             </div>
                             @if (array_key_exists('message', $APIerrors))
                                 <div class="divider"></div>
                                 <p class="subtitulos">{{ $APIerrors['message'] }}</p>
-                            @endif
-                            @if ($clientToUpdate)
-                                <br>
-                                <a class="btn btn-flat" wire:click='cancelUpdate()'><i class="tiny material-icons home">do_not_disturb</i></a>
-                                <p class="textos">Cancelar</p>
                             @endif
                         </div>
                         <div class="floatingActionButton right">

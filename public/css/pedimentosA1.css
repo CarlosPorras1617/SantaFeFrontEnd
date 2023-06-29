@@ -1,0 +1,66 @@
+:root{
+    --color-icons-inactive: #ba9695;
+    --color-fondo: #752E2B;
+    --color-paginate-active:#E4DDDD;
+    --color-paginate-inactive: #AD7A78;
+    --color-rows-tablas:#DDC4C4;
+}
+.fondo{
+    background: var(--color-fondo);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1;
+}
+.contenedorPedimentosA1{
+    position: relative;
+    top: 140px;
+    z-index: 10;
+}
+
+.pedimentoA1Form{
+    border-radius: 10px;
+    background-color: white;
+    height: 45rem;
+    width: 40rem;
+}
+.pedimentoA1FormButton{
+    transition: transform 0.3s;
+    background-color: var(--color-paginate-inactive);
+    color: inherit;
+    color: white;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.pedimentoA1FormButton:hover{
+    transform: scale(1.5);
+    background-color: var(--color-fondo);
+    color: inherit;
+    color: white;
+    font-weight: bold;
+}
+.pedimentoA1FormButtonsRow{
+    display: flex;
+    justify-content: space-between;
+}
+.input-field .character-counter {
+    position: static;
+    font-size: 12px; /* Adjust the font size as needed */
+}
+.modal{
+    margin-top: 100px;
+}
+.showErrors{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 200px;
+        background-color: gainsboro;
+        border-radius: 10px;
+        opacity: 0.8;
+}
+

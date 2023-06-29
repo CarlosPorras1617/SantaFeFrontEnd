@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 l3">
+            <a href="pedimentosA1" class="col s12 m6 l3">
                 <div class="row cards">
                     <div class="card">
                         <div class="card-image">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
             <a class="col s12 m6 l3" href="clientes">
                 <div class="row cards">
                     <div class="card">
@@ -70,7 +70,6 @@
                             <p class="textos">
                                 Agrega, modifica, consulta o elimina
                                 los distintos trámites.
-
                             </p>
                         </div>
                     </div>
@@ -85,7 +84,7 @@
                     <form>
                         <div class="input-field col s8 cards ">
                             <input type="number" id="numero" data-length="11">
-                            <label for="icon_prefix2">Numero de Entrada</label>
+                            <label for="numero">Numero de Entrada</label>
                         </div>
                         <i class="material-icons prefix">search</i>
                     </form>

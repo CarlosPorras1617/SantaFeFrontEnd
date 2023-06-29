@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Clientes;
+use App\Http\Livewire\PedimentosA1;
 use App\Http\Livewire\Home;
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,4 @@ use App\Http\Livewire\Home;
 Route::get('/', Home::class);
 
 Route::get('/clientes', Clientes::class);
+Route::get('/pedimentosA1', PedimentosA1::class);

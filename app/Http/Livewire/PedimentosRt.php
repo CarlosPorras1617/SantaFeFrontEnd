@@ -5,30 +5,29 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Exception\RequestException;
 
-class PedimentosA1 extends Component
+class PedimentosRt extends Component
 {
     //cualquier cambio de variable en esta parte, ejecuta la funcion de render y se actualzian los datos
     public $currentPage = 1;
-    public $idPedimentoA1;
-    public $pedimentoA1ToUpdate = [];
-    public $dataPedimentoA1 = [];
+    public $idPedimentoRT;
+    public $pedimentoRTToUpdate = [];
+    public $dataPedimentoRT = [];
     public $APIerrors =  [];
     public $semana = null;
     public $errorCodigo = 0;
-    public $pedimentosA1 = [];
+    public $pedimentosRT = [];
 
 
     public function render()
     {
-        $totalPedimentosA1 = 0;
+        $totalPedimentosRT = 0;
 
         $currentpage = null;
         //Obtiene registro busqueda
-        $searchBySemana = Http::get('http://127.0.0.1:8000/api/likePedimentort/?semana' . $this->semana);
-        $pedimentosA1Found = $searchBySemana->json();
+        $searchBySemana = Http::get('http://127.0.0.1:8000/api/likePedimentoa1/?semana=' . $this->semana);
+        $pedimentosRTFound = $searchBySemana->json();
         //Obtiene los registros en base a la página
         //$totalPaginated = Http::get('http://127.0.0.1:8000/api/pedimentosa1/activos?page=' . $this->currentPage);
         //Peticion a PedimentosA1 para obtener el total de pedimentosA1 para la paginación
@@ -40,19 +39,19 @@ class PedimentosA1 extends Component
         $retryDelay = 1;
         do {
             try {
-                $promise2 = $client->getAsync('http://127.0.0.1:8000/api/pedimentosa1/activos?page=' . $this->currentPage);
+                $promise2 = $client->getAsync('http://127.0.0.1:8000/api/pedimentosrt/activos?page=' . $this->currentPage);
                 $response2 = $promise2->wait();
 
-                $promise = $client->getAsync('http://127.0.0.1:8000/api/pedimentosa1/');
+                $promise = $client->getAsync('http://127.0.0.1:8000/api/pedimentosrt/');
                 $response= $promise->wait();
 
                 $data = $response->getBody()->getContents();
                 $dataJson = json_decode($data);
-                $totalPedimentosA1 = count($dataJson);
+                $totalPedimentosRT = count($dataJson);
 
                 $data2 = $response2->getBody()->getContents();
-                $this->pedimentosA1 = json_decode($data2,true);
-                $currentpage = $this->pedimentosA1['current_page'];
+                $this->pedimentosRT = json_decode($data2,true);
+                $currentpage = $this->pedimentosRT['current_page'];
                 break;
             } catch (RequestException $exception) {
                 if ($exception->getResponse()->getStatusCode() == 429 && $retries < $maxRetries) {
@@ -77,7 +76,7 @@ class PedimentosA1 extends Component
         //Current page para el front
         //$currentpage = $pedimentosA1['current_page'];
 
-        return view('livewire.pedimentos-a1', compact('totalPedimentosA1', 'currentpage', 'pedimentosA1Found'));
+        return view('livewire.pedimentos-rt', compact('totalPedimentosRT', 'currentpage', 'pedimentosRTFound'));
     }
 
     public function nextsPages($i)
@@ -86,23 +85,23 @@ class PedimentosA1 extends Component
         $this->currentPage = $i;
     }
 
-    public function deletePedimentoA1($id)
+    public function deletePedimentoRT($id)
     {
-        $this->idPedimentoA1 = $id;
-        $response = Http::delete('http://127.0.0.1:8000/api/pedimentoa1/eliminar/' . $this->idPedimentoA1);
+        $this->idPedimentoRT = $id;
+        $response = Http::delete('http://127.0.0.1:8000/api/pedimentort/eliminar/' . $this->idPedimentoRT);
         if (!$response->successful()) {
         } else {
             $this->APIerrors = $response->json();
-            redirect('/pedimentosA1');
+            redirect('/pedimentosRt');
         }
     }
 
-    public function createPedimentoA1()
+    public function createPedimentoRT()
     {
-        $response = Http::withHeaders(['Accept' => 'Application/son'])->post('http://127.0.0.1:8000/api/pedimentoa1', $this->dataPedimentoA1);
+        $response = Http::withHeaders(['Accept' => 'Application/son'])->post('http://127.0.0.1:8000/api/pedimentort', $this->dataPedimentoRT);
         if ($response->successful()) {
-            $this->dataPedimentoA1 = [];
-            $this->pedimentoA1ToUpdate = [];
+            $this->dataPedimentoRT = [];
+            $this->pedimentoRTToUpdate = [];
             $this->APIerrors = [];
         } else {
             $responseData = $response->json();
@@ -114,25 +113,25 @@ class PedimentosA1 extends Component
         }
     }
 
-    public function updatePedimentoA1($id){
-        $response = Http::withHeaders(['Accept' => 'Application/json'])->put('http://127.0.0.1:8000/api/pedimentoa1/' . $id, $this->dataPedimentoA1);
+    public function updatePedimentoRT($id){
+        $response = Http::withHeaders(['Accept' => 'Application/json'])->put('http://127.0.0.1:8000/api/pedimentort/' . $id, $this->dataPedimentoRT);
         if ($response->successful()) {
-            $this->dataPedimentoA1 = [];
+            $this->dataPedimentoRT = [];
         } else {
             $this->APIerrors = $response->json();
         }
     }
 
-    public function getPedimentoA1($id)
+    public function getPedimentoRT($id)
     {
         //get client
-        $response = Http::get('http://127.0.0.1:8000/api/pedimentoa1/' . $id);
-        $pedimentoA1 = $response->json();
-        $this->pedimentoA1ToUpdate = $pedimentoA1;
+        $response = Http::get('http://127.0.0.1:8000/api/pedimentort/' . $id);
+        $pedimentoRT = $response->json();
+        $this->pedimentoRTToUpdate = $pedimentoRT;
     }
 
     public function cancelUpdate()
     {
-        $this->pedimentoA1ToUpdate = [];
+        $this->pedimentoRTToUpdate = [];
     }
 }

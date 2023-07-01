@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{ asset('css/clientes.css') }}">
     <!--css PedimentosA1-->
     <link rel="stylesheet" href="{{ asset('css/pedimentosA1.css') }}">
+    <!--css PedimentosRt-->
+    <link rel="stylesheet" href="{{ asset('css/pedimentosRt.css') }}">
 
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

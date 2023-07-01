@@ -2,14 +2,14 @@
     <div class="fondo">
 
         <!--CONTENEDOR CENTRAL DE LA PAGINA-->
-        <div class="contenedorPedimentosA1">
+        <div class="contenedorPedimentosRT">
 
             <!--CONTENEDOR DE BOTONES DE NAVEGACION ENTRE PEDIMENTOS-->
             <div class="navegacionPedimentos">
                 <div class="row">
                     <a href="pedimentosA1" id="pedimentosA1Navegacion" class="btn botonPedimentos"
                         style="margin-right: 10px;">PEDIMENTOS A1</a>
-                    <a href="pedimentosRt" class="btn botonPedimentos" style="margin-left: 10px;"">PEDIMENTOS RT</a>
+                    <a href="pedimentosRt" id="pedimentosRtNavegacion" class="btn botonPedimentos" style="margin-left: 10px;"">PEDIMENTOS RT</a>
 
                     <!--SCRIPT QUE VERIFICA EN QUE URL ESTAMOS Y CAMBIA COLOR DE BOTON-->
                     <script>
@@ -19,9 +19,9 @@
                             // Obtener la URL actual
                             var url = window.location.href;
                             // Obtener el botón por su ID
-                            var boton = document.getElementById('pedimentosA1Navegacion');
+                            var boton = document.getElementById('pedimentosRtNavegacion');
                             // Verificar la URL y aplicar el color correspondiente al botón
-                            if (url.includes('pedimentosA1')) {
+                            if (url.includes('pedimentosRt')) {
                                 boton.style.backgroundColor = '#E4DDDD';
                             }
                         }
@@ -50,44 +50,44 @@
 
                                 <!-- VALIDA SI LA BUSQUEDA POR SEMANA ES NULA, SI LO ES MUESTRA TODOS LOS A1-->
                                 @if (is_null($semana))
-                                    @foreach ($pedimentosA1['data'] as $pedimentoA1)
+                                    @foreach ($pedimentosRT['data'] as $pedimentoRT)
                                         <tr>
-                                            <td>{{ $pedimentoA1['id'] }}</td>
-                                            <td>{{ $pedimentoA1['semana'] }}</td>
-                                            <td>{{ $pedimentoA1['patente'] }}</td>
-                                            <td>{{ $pedimentoA1['noPedimento'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ $pedimentoRT['id'] }}</td>
+                                            <td>{{ $pedimentoRT['semana'] }}</td>
+                                            <td>{{ $pedimentoRT['patente'] }}</td>
+                                            <td>{{ $pedimentoRT['noPedimento'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoRT['created_at'], 'America/Hermosillo')->format('d/m/y') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoRT['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='getPedimentoA1({{ $pedimentoA1['id'] }})'><i
+                                                    wire:click='getPedimentoRT({{ $pedimentoRT['id'] }})'><i
                                                         class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='deletePedimentoA1({{ $pedimentoA1['id'] }})'><i
+                                                    wire:click='deletePedimentoRT({{ $pedimentoRT['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @else
                                     <!--SI SEMANA NO ES NULA MUESTRA LOS PEDIMENTOS A1 ENCONTRADO-->
-                                    @foreach ($pedimentosA1Found['data'] as $pedimentoA1)
+                                    @foreach ($pedimentosRTFound['data'] as $pedimentoRT)
                                         <tr>
-                                            <td>{{ $pedimentoA1['id'] }}</td>
-                                            <td>{{ $pedimentoA1['semana'] }}</td>
-                                            <td>{{ $pedimentoA1['patente'] }}</td>
-                                            <td>{{ $pedimentoA1['noPedimento'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ $pedimentoRT['id'] }}</td>
+                                            <td>{{ $pedimentoRT['semana'] }}</td>
+                                            <td>{{ $pedimentoRT['patente'] }}</td>
+                                            <td>{{ $pedimentoRT['noPedimento'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoRT['created_at'], 'America/Hermosillo')->format('d/m/y') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoRT['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='getPedimentoA1({{ $pedimentoA1['id'] }})'><i
+                                                    wire:click='getPedimentoRT({{ $pedimentoRT['id'] }})'><i
                                                         class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='deletePedimentoA1({{ $pedimentoA1['id'] }})'><i
+                                                    wire:click='deletePedimentoRT({{ $pedimentoRT['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
                                             </td>
                                         </tr>
@@ -102,7 +102,7 @@
                     <ul class="pagination">
                         @php
                             //CREAMOS CUANTAS DIVISIONES TENDRA EL PAGINATE DIVIDIENDO EL TOTAL DE CLIENTES / LOS MOSTRADOS EN PANTALLA
-                            $totalPages = ceil($totalPedimentosA1 / 10);
+                            $totalPages = ceil($totalPedimentosRT / 10);
                         @endphp
                         @for ($i = 1; $i <= $totalPages; $i++)
                             <!--CREAMOS LOS BOTONES EN BASE A LOS NUMEROS DE REGISTROS CADA UNO CON LA AYUDA DE LA FUNCION NEXTSPAGES Y MANDANDO LA PAGINA A LA QUE NAVEGAREMOS-->
@@ -116,8 +116,8 @@
 
                 <!--FORMULARIO CREACION DE PEDIMENTOS A1-->
                 <div class="col s12 m12 l4">
-                    <form wire:submit.prevent='createPedimentoA1'>
-                        <div class="pedimentoA1Form center">
+                    <form wire:submit.prevent='createPedimentoRT'>
+                        <div class="pedimentoRTForm center">
                             <br>
                             <!---BARRA BUSQUEDA-->
                             <div class="input-field campos">
@@ -125,30 +125,30 @@
                                 <input type="number" wire:model='semana' id="buscar">
                                 <label for="buscar" class="active">Buscar por semana</label>
                             </div>
-                            <h3 class="subtitulos">PEDIMENTOS A1</h3>
+                            <h3 class="subtitulos">PEDIMENTOS RT</h3>
                             <div class="input-field campos">
                                 <label class="active"
-                                    for="semana">{{ $pedimentoA1ToUpdate ? $pedimentoA1ToUpdate['semana'] : 'Semana' }}</label>
-                                <input wire:model='dataPedimentoA1.semana' id="semana" type="number">
+                                    for="semana">{{ $pedimentoRTToUpdate ? $pedimentoRTToUpdate['semana'] : 'Semana' }}</label>
+                                <input wire:model='dataPedimentoRT.semana' id="semana" type="number">
                             </div>
                             <div class="input-field campos">
-                                <input wire:model='dataPedimentoA1.patente' id="patente" type="number">
+                                <input wire:model='dataPedimentoRT.patente' id="patente" type="number">
                                 <label class="active"
-                                    for="rfc">{{ $pedimentoA1ToUpdate ? $pedimentoA1ToUpdate['patente'] : 'Patente' }}</label>
+                                    for="rfc">{{ $pedimentoRTToUpdate ? $pedimentoRTToUpdate['patente'] : 'Patente' }}</label>
                             </div>
                             <div class="input-field campos">
                                 <label class="active"
-                                    for="noPedimento">{{ $pedimentoA1ToUpdate ? $pedimentoA1ToUpdate['noPedimento'] : 'No. Pedimento' }}</label>
-                                <input type="number" id="noPedimento" wire:model='dataPedimentoA1.noPedimento'>
+                                    for="noPedimento">{{ $pedimentoRTToUpdate ? $pedimentoRTToUpdate['noPedimento'] : 'No. Pedimento' }}</label>
+                                <input type="number" id="noPedimento" wire:model='dataPedimentoRT.noPedimento'>
                             </div>
 
                             <!--CREAR CLIENTE-->
-                            <a wire:click='createPedimentoA1' class="btn pedimentoA1FormButton">CREAR</a>
+                            <a wire:click='createPedimentoRT' class="btn pedimentoRTFormButton">CREAR</a>
 
                             <!--SI SE SELECCIONO UN CLIENTE PARA EDITAR, SE ACTIVAN LOS SIGUIENTES BOTONES-->
-                            @if ($pedimentoA1ToUpdate)
-                                <a wire:click='updatePedimentoA1({{ $pedimentoA1ToUpdate['id'] }})'
-                                    class="btn pedimentoA1FormButton">ACTUALIZAR</a>
+                            @if ($pedimentoRTToUpdate)
+                                <a wire:click='updatePedimentoRT({{ $pedimentoRTToUpdate['id'] }})'
+                                    class="btn pedimentoRTFormButton">ACTUALIZAR</a>
                                 <a class="btn btn-flat" wire:click='cancelUpdate()'><i
                                         class="tiny material-icons home">do_not_disturb</i></a>
                             @endif
@@ -180,3 +180,4 @@
         </div>
     </div>
 </div>
+

@@ -16,20 +16,20 @@
     z-index: -1;
 }
 
-.contenedorPedimentosA1{
+.contenedorPedimentosRT{
     position: relative;
     top: 140px;
     z-index: 10;
 }
 
-.pedimentoA1Form{
+.pedimentoRTForm{
     border-radius: 10px;
     background-color: white;
     height: 45rem;
     width: 40rem;
 }
 
-.pedimentoA1FormButton{
+.pedimentoRTFormButton{
     transition: transform 0.3s;
     background-color: var(--color-paginate-inactive);
     color: inherit;
@@ -38,7 +38,7 @@
     margin-right: 20px;
 }
 
-.pedimentoA1FormButton:hover{
+.pedimentoRTFormButton:hover{
     transform: scale(1.5);
     background-color: var(--color-fondo);
     color: inherit;
@@ -46,36 +46,4 @@
     font-weight: bold;
 }
 
-.modal{
-    margin-top: 100px;
-}
-
-.showErrors{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 500px;
-        height: 200px;
-        background-color: gainsboro;
-        border-radius: 10px;
-        opacity: 0.8;
-}
-
-.navegacionPedimentos{
-    position: absolute;
-    top: -55px;
-    left: 10px;
-}
-
-.botonPedimentos{
-    background-color: var(--color-paginate-inactive);
-    color: black;
-    font-weight: bold;
-    border-radius: 10px;
-}
-
-.botonPedimentos:hover{
-    background-color: var(--color-paginate-active);
-}
 

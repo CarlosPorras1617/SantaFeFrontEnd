@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </a>
-            <div class="col s12 m6 l3">
+            <a class="col s12 m6 l3" href="tramites">
                 <div class="row cards">
                     <div class="card">
                         <div class="card-image">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         <h1 class="titulos">CONSULTA</h1>
         <h3 class="textos">Consulta el estatus de tus trámites</h3>

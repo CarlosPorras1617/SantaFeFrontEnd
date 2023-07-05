@@ -27,7 +27,7 @@ class PedimentosA1 extends Component
 
         $currentpage = null;
         //Obtiene registro busqueda
-        $searchBySemana = Http::get('http://127.0.0.1:8000/api/likePedimentort/?semana' . $this->semana);
+        $searchBySemana = Http::get('http://127.0.0.1:8000/api/likePedimentoa1/?semana=' . $this->semana);
         $pedimentosA1Found = $searchBySemana->json();
         //Obtiene los registros en base a la página
         //$totalPaginated = Http::get('http://127.0.0.1:8000/api/pedimentosa1/activos?page=' . $this->currentPage);

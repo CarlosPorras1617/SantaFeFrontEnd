@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="{{ asset('css/pedimentosA1.css') }}">
     <!--css PedimentosRt-->
     <link rel="stylesheet" href="{{ asset('css/pedimentosRt.css') }}">
+    <!--css Tramites-->
+    <link rel="stylesheet" href="{{ asset('css/tramites.css') }}">
 
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -43,10 +45,11 @@
             <img class="brand-logo center" src="{{ asset('images/AgenciaSantaFeLogo.png') }}">
             <div class="contenedor">
                 <ul class="right hide-on-med-and-down list">
+                    <li><a class="large material-icons" href="/">home</a></li>
                     <li><a class="large material-icons">local_shipping</a></li>
                     <li><a class="large material-icons" href="pedimentosA1">assignment</a></li>
                     <li><a class="large material-icons" href="clientes">people</a></li>
-                    <li><a class="large material-icons">add</a></li>
+                    <li><a class="large material-icons" href="tramites">add</a></li>
                 </ul>
             </div>
         </div>
@@ -62,6 +65,7 @@
             $(document).ready(function() {
                 $('input#numero').characterCounter();
                 $('input#noPedimento').characterCounter();
+                $('input#numEntrada').characterCounter();
                 $('.modal').modal();
             });
         </script>

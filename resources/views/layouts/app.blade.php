@@ -66,6 +66,9 @@
                 $('input#numero').characterCounter();
                 $('input#noPedimento').characterCounter();
                 $('input#numEntrada').characterCounter();
+                $('input#pedimentoA1').characterCounter();
+                $('input#pedimentoRT').characterCounter();
+                $('select').formSelect();
                 $('.modal').modal();
             });
         </script>

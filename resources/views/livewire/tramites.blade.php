@@ -134,62 +134,96 @@
         <!--Para que no se cierre modal-->
         <div wire:ignore.self id="mi-modal" class="modal">
             <div class="modal-content">
-                <h1>CREAR TRÁMITE</h1>
+                <h6>CREAR TRÁMITE</h6>
                 <form>
                     <div class="row">
-                      <div class="input-field col s6">
-                        <!--Defer para que no se quite el character counter--->
-                        <input id="numEntrada" type="number" wire:model.defer='dataTramite.numEntrada' class="validate" data-length="11">
-                        <label for="numEntrada" class="active">Numero Entrada</label>
-                      </div>
-                      <div class="input-field col s6">
-                        <input id="apellido" type="text" class="validate">
-                        <label for="apellido">Apellido</label>
-                      </div>
+                        <div class="input-field col s6">
+                            <!--Defer para que no se quite el character counter--->
+                            <input id="numEntrada" type="number" wire:model.defer='dataTramite.numEntrada'
+                                class="validate" data-length="11">
+                            <label for="numEntrada" class="active">Numero Entrada</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select class="form-select" wire:model.defer='dataTramite.cliente'>
+                                <option value=""> </option>
+                                @foreach ($clientsToFront as $clients)
+                                    <option value="{{ $clients['nombre'] }}">{{ $clients['nombre'] }}</option>
+                                @endforeach
+                            </select>
+                            <label for="cliente">Cliente</label>
+                        </div>
                     </div>
                     <div class="row">
-                      <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
-                        <label for="email">Correo electrónico</label>
-                      </div>
+                        <div class="input-field col s6">
+                            <input id="candados" type="text" wire:model.defer='dataTramite.candados'
+                                class="validate">
+                            <label for="candados">Candados</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="factura" type="text" wire:model.defer='dataTramite.factura'
+                                class="validate">
+                            <label for="factura">Factura</label>
+                        </div>
                     </div>
                     <div class="row">
-                      <div class="input-field col s6">
-                        <input id="telefono" type="text" class="validate">
-                        <label for="telefono">Teléfono</label>
-                      </div>
-                      <div class="input-field col s6">
-                        <input id="direccion" type="text" class="validate">
-                        <label for="direccion">Dirección</label>
-                      </div>
+                        <div class="input-field col s6">
+                            <select class="form-select" wire:model.defer='dataTramite.pedimentoRT'>
+                                <option value=""> </option>
+                                @foreach ($pedimentosRTToFront as $pedimentoRT)
+                                    <option value="{{ $pedimentoRT['noPedimento'] }}">
+                                        {{ $pedimentoRT['noPedimento'] }}</option>
+                                @endforeach
+                            </select>
+                            <label for="pedimentoRT">Pedimento RT</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="pedimentoA1" type="number" wire:model.defer='dataTramite.pedimentoA1'
+                                class="validate" data-length="7">
+                            <label for="pedimentoA1">Pedimento A1</label>
+                        </div>
                     </div>
                     <div class="row">
-                      <div class="input-field col s4">
-                        <input id="ciudad" type="text" class="validate">
-                        <label for="ciudad">Ciudad</label>
-                      </div>
-                      <div class="input-field col s4">
-                        <input id="estado" type="text" class="validate">
-                        <label for="estado">Estado</label>
-                      </div>
-                      <div class="input-field col s4">
-                        <input id="codigoPostal" type="text" class="validate">
-                        <label for="codigoPostal">Código Postal</label>
-                      </div>
+                        <div class="input-field col s3">
+                            <select class="form-select" wire:model.defer='dataTramite.chofer'>
+                                <option value=""> </option>
+                                @foreach ($choferesToFront as $chofer)
+                                    <option value="{{ $chofer['nombre'] }}">
+                                        {{ $chofer['nombre'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="chofer">Chofer</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <label for="apellidoPaterno" id="nombreLabel"></label>
+                        </div>
+                        <div class="input-field col s3">
+                            <label for="numero">Número</label>
+                        </div>
+                        <div class="input-field col s3">
+                            <label for="visa">Visa</label>
+                        </div>
                     </div>
                     <div class="row">
-                      <div class="input-field col s12">
-                        <textarea id="mensaje" class="materialize-textarea"></textarea>
-                        <label for="mensaje">Mensaje</label>
-                      </div>
+                        <div class="input-field col s4">
+                            <input id="bultos" type="text" wire:model.defer='dataTramite.numBultos'
+                                class="validate">
+                            <label for="bultos">Bultos</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="placa" type="text" wire:model.defer='dataTramite.placa'
+                                class="validate">
+                            <label for="placa">Placa</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="economico" type="text" wire:model.defer='dataTramite.economico'
+                                class="validate">
+                            <label for="economico">Economico</label>
+                        </div>
                     </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <button class="btn waves-effect waves-light" type="submit">Enviar</button>
-                      </div>
-                    </div>
-                  </form>
-            <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                </form>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                    <a wire:click='createTramite' class="btn pedimentoA1FormButton">CREAR</a>
+                </div>
             </div>
-          </div>

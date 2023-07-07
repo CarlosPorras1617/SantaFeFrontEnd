@@ -96,11 +96,26 @@ class Tramites extends Component
 
     public function createTramite()
     {
+        $getDataChofer = Http::get('http://127.0.0.1:8000/api/chofer/' . $this->dataTramite['chofer']);
+        if ($getDataChofer->successful()) {
+            $choferJson = $getDataChofer->json();
+            $nombreChofer = $choferJson['nombre'];
+            $numCelular = $choferJson['numCelular'];
+            $licencia = $choferJson['noLicencia'];
+            $nuevosCampos = [
+                'cellChofer' => $numCelular,
+                'noLicenciaChofer' => $licencia
+            ];
+            $this->dataTramite = array_merge($nuevosCampos, $this->dataTramite);
+        }
+        //sustituimos ID por nombre de chofer
+        $this->dataTramite = array_replace($this->dataTramite, ['chofer' => $nombreChofer]);
         $response = Http::withHeaders(['Accept' => 'Application/son'])->post('http://127.0.0.1:8000/api/tramites', $this->dataTramite);
         if ($response->successful()) {
             $this->dataTramite = [];
             $this->tramiteToUpdate = [];
             $this->APIerrors = [];
+            redirect('/tramites');
         } else {
             $responseData = $response->json();
             if (isset($responseData['message'])) {
@@ -111,12 +126,14 @@ class Tramites extends Component
             }
         }
     }
-    public function setSelectedChofer($choferId)
+
+    public function getTramite($id)
     {
-        //Obtener Choferes
-        $choferes = Http::get('http://127.0.0.1:8000/api/choferes');
-        $choferesJson = $choferes->json();
-        $choferesCollection = collect($choferesJson);
-        $this->selectedChofer = $choferesCollection->firstWhere('id', $choferId);
+        //get client
+        $response = Http::get('http://127.0.0.1:8000/api/tramite/' . $id);
+        $tramite = $response->json();
+        $this->tramiteToUpdate = $tramite;
+        $abrirModal = true;
+        return view('livewire.tramites', compact('abrirModal'));
     }
 }

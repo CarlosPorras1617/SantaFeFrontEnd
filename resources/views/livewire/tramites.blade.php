@@ -37,6 +37,8 @@
                                     <th>PedimentoA1</th>
                                     <th>Cliente</th>
                                     <th>Chofer</th>
+                                    <th>Cell Chofer</th>
+                                    <th>No. Licencia</th>
                                     <th>Placa</th>
                                     <th>Economico</th>
                                     <th>Candados</th>
@@ -59,6 +61,8 @@
                                             <td>{{ $tramite['pedimentoA1'] }}</td>
                                             <td>{{ $tramite['cliente'] }}</td>
                                             <td>{{ $tramite['chofer'] }}</td>
+                                            <td>{{ $tramite['cellChofer'] }}</td>
+                                            <td>{{ $tramite['noLicenciaChofer'] }}</td>
                                             <td>{{ $tramite['placa'] }}</td>
                                             <td>{{ $tramite['economico'] }}</td>
                                             <td>{{ $tramite['candados'] }}</td>
@@ -69,9 +73,9 @@
                                             <td>{{ \Carbon\Carbon::parse($tramite['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
                                             </td>
                                             <td style="display: flex">
-                                                <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='getPedimentoA1({{ $tramite['id'] }})'><i
-                                                        class="large material-icons">create</i></a>
+                                                <a class="btn btn-flat modal-trigger"
+                                                     href="/tramite/{{$tramite['id']}}"
+                                                    style="margin: auto"><i class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
                                                     wire:click='deleteTramite({{ $tramite['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
@@ -88,6 +92,8 @@
                                             <td>{{ $tramite['pedimentoA1'] }}</td>
                                             <td>{{ $tramite['cliente'] }}</td>
                                             <td>{{ $tramite['chofer'] }}</td>
+                                            <td>{{ $tramite['cellChofer'] }}</td>
+                                            <td>{{ $tramite['noLicenciaChofer'] }}</td>
                                             <td>{{ $tramite['placa'] }}</td>
                                             <td>{{ $tramite['economico'] }}</td>
                                             <td>{{ $tramite['candados'] }}</td>
@@ -187,7 +193,7 @@
                             <select class="form-select" wire:model.defer='dataTramite.chofer'>
                                 <option value=""> </option>
                                 @foreach ($choferesToFront as $chofer)
-                                    <option value="{{ $chofer['nombre'] }}">
+                                    <option value="{{ $chofer['id'] }}">
                                         {{ $chofer['nombre'] }}
                                     </option>
                                 @endforeach
@@ -227,3 +233,5 @@
                     <a wire:click='createTramite' class="btn pedimentoA1FormButton">CREAR</a>
                 </div>
             </div>
+
+        </div>

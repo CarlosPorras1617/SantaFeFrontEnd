@@ -59,3 +59,6 @@
 #mi-modal.modal {
     width: 1200px; /* Ajusta el ancho según tus necesidades */
 }
+.select-dropdown {
+    height: 200px;
+  }

@@ -1,0 +1,10 @@
+.imagenLogoActualizar{
+    height: 200px !important;
+}
+
+.contenedorErroresActualizar{
+    width: 250%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}

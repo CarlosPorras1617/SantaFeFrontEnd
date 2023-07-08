@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="{{ asset('css/pedimentosRt.css') }}">
     <!--css Tramites-->
     <link rel="stylesheet" href="{{ asset('css/tramites.css') }}">
+    <!--css actualizar Tramites-->
+    <link rel="stylesheet" href="{{ asset('css/actualizarTramite.css') }}">
 
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

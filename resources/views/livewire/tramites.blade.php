@@ -74,8 +74,8 @@
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat modal-trigger"
-                                                     href="/tramite/{{$tramite['id']}}"
-                                                    style="margin: auto"><i class="large material-icons">create</i></a>
+                                                    href="/tramite/{{ $tramite['id'] }}" style="margin: auto"><i
+                                                        class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
                                                     wire:click='deleteTramite({{ $tramite['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
@@ -105,10 +105,10 @@
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='getPedimentoA1({{ $tramite['id'] }})'><i
+                                                href="/tramite/{{ $tramite['id'] }}"><i
                                                         class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='deleteTramite({{ $tramite['id'] }})'><i
+                                                wire:click='deleteTramite({{ $tramite['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
                                             </td>
                                         </tr>
@@ -140,7 +140,7 @@
         <!--Para que no se cierre modal-->
         <div wire:ignore.self id="mi-modal" class="modal">
             <div class="modal-content">
-                <h6>CREAR TRÁMITE</h6>
+                <h4>CREAR TRÁMITE</h4>
                 <form>
                     <div class="row">
                         <div class="input-field col s6">
@@ -151,7 +151,7 @@
                         </div>
                         <div class="input-field col s6">
                             <select class="form-select" wire:model.defer='dataTramite.cliente'>
-                                <option value=""> </option>
+                                <option  value=""> </option>
                                 @foreach ($clientsToFront as $clients)
                                     <option value="{{ $clients['nombre'] }}">{{ $clients['nombre'] }}</option>
                                 @endforeach
@@ -173,7 +173,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <select class="form-select" wire:model.defer='dataTramite.pedimentoRT'>
+                            <select class="red" wire:model.defer='dataTramite.pedimentoRT'>
                                 <option value=""> </option>
                                 @foreach ($pedimentosRTToFront as $pedimentoRT)
                                     <option value="{{ $pedimentoRT['noPedimento'] }}">
@@ -183,8 +183,13 @@
                             <label for="pedimentoRT">Pedimento RT</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="pedimentoA1" type="number" wire:model.defer='dataTramite.pedimentoA1'
-                                class="validate" data-length="7">
+                            <select class="form-select" wire:model.defer='dataTramite.pedimentoA1'>
+                                <option value="0000000">0000000</option>
+                                @foreach ($pedimentosA1ToFront as $pedimentoA1)
+                                    <option value="{{ $pedimentoA1['noPedimento'] }}">
+                                        {{ $pedimentoA1['noPedimento'] }}</option>
+                                @endforeach
+                            </select>
                             <label for="pedimentoA1">Pedimento A1</label>
                         </div>
                     </div>
@@ -200,36 +205,27 @@
                             </select>
                             <label for="chofer">Chofer</label>
                         </div>
+
                         <div class="input-field col s3">
-                            <label for="apellidoPaterno" id="nombreLabel"></label>
-                        </div>
-                        <div class="input-field col s3">
-                            <label for="numero">Número</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <label for="visa">Visa</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4">
                             <input id="bultos" type="text" wire:model.defer='dataTramite.numBultos'
                                 class="validate">
                             <label for="bultos">Bultos</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <input id="placa" type="text" wire:model.defer='dataTramite.placa'
                                 class="validate">
                             <label for="placa">Placa</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s3">
                             <input id="economico" type="text" wire:model.defer='dataTramite.economico'
                                 class="validate">
                             <label for="economico">Economico</label>
                         </div>
+
                     </div>
                 </form>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                    <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
                     <a wire:click='createTramite' class="btn pedimentoA1FormButton">CREAR</a>
                 </div>
             </div>

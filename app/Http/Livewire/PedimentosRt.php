@@ -117,8 +117,12 @@ class PedimentosRt extends Component
         $response = Http::withHeaders(['Accept' => 'Application/json'])->put('http://127.0.0.1:8000/api/pedimentort/' . $id, $this->dataPedimentoRT);
         if ($response->successful()) {
             $this->dataPedimentoRT = [];
+            $this->APIerrors = [];
         } else {
-            $this->APIerrors = $response->json();
+            $responseData = $response->json();
+            if (isset($responseData['message'])) {
+                $this->APIerrors = $responseData['message'];
+            }
         }
     }
 

@@ -118,8 +118,12 @@ class PedimentosA1 extends Component
         $response = Http::withHeaders(['Accept' => 'Application/json'])->put('http://127.0.0.1:8000/api/pedimentoa1/' . $id, $this->dataPedimentoA1);
         if ($response->successful()) {
             $this->dataPedimentoA1 = [];
+            $this->APIerrors = [];
         } else {
-            $this->APIerrors = $response->json();
+            $responseData = $response->json();
+            if (isset($responseData['message'])) {
+                $this->APIerrors = $responseData['message'];
+            }
         }
     }
 

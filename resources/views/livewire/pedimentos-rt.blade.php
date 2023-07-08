@@ -9,7 +9,8 @@
                 <div class="row">
                     <a href="pedimentosA1" id="pedimentosA1Navegacion" class="btn botonPedimentos"
                         style="margin-right: 10px;">PEDIMENTOS A1</a>
-                    <a href="pedimentosRt" id="pedimentosRtNavegacion" class="btn botonPedimentos" style="margin-left: 10px;"">PEDIMENTOS RT</a>
+                    <a href="pedimentosRt" id="pedimentosRtNavegacion" class="btn botonPedimentos"
+                        style="margin-left: 10px;"">PEDIMENTOS RT</a>
 
                     <!--SCRIPT QUE VERIFICA EN QUE URL ESTAMOS Y CAMBIA COLOR DE BOTON-->
                     <script>

@@ -7,8 +7,8 @@
             <!--CONTENEDOR DE BOTONES DE NAVEGACION ENTRE PEDIMENTOS-->
             <div class="fondoBuscarNumEntrada"></div>
             <div class="floatingActionButtonCrearTramite">
-                <a class="waves-effect waves-light btn modal-trigger CrearTramite" href="#mi-modal"><i
-                        class="material-icons tramites right">control_point</i>Crear Trámite</a>
+                <a class="waves-effect waves-light btn modal-trigger CrearTramite" href="#choferModal"><i
+                        class="material-icons tramites right">control_point</i>Crear Chofer</a>
             </div>
             <div class="buscarByNumEntradaInput">
                 <div class="row">
@@ -16,8 +16,8 @@
                     <div class="input-field">
                         <div class="buscarByNumEntrada">
                             <i class="material-icons prefix">search</i>
-                            <input type="number" class="NumEntrada" wire:model='numEntrada' id="buscar">
-                            <label for="buscar" class="active">Buscar por numero entrada</label>
+                            <input type="text" class="NumEntrada" wire:model='nombreChofer' id="buscar">
+                            <label for="buscar" class="active">Buscar por nombre</label>
                         </div>
                     </div>
                 </div>
@@ -31,19 +31,11 @@
                         <table class="table white">
                             <thead>
                                 <tr class="textos center" style="background-color: #AD7A78; ">
-                                    <th style="width: 15px">NumEntrada</th>
-                                    <th>Factura</th>
-                                    <th>PedimentoRT</th>
-                                    <th>PedimentoA1</th>
-                                    <th>Cliente</th>
-                                    <th>Chofer</th>
-                                    <th>Cell Chofer</th>
-                                    <th>No. Licencia</th>
-                                    <th>Placa</th>
-                                    <th>Economico</th>
-                                    <th>Candados</th>
-                                    <th>NumBultos</th>
-                                    <th>Barcode</th>
+                                    <th style="width: 350px">Nombre</th>
+                                    <th>Nacimiento</th>
+                                    <th>Celular</th>
+                                    <th>Licencia</th>
+                                    <th>Visa</th>
                                     <th>Creado</th>
                                     <th>Actualizado</th>
                                     <th style="width: 80px">Acciones</th>
@@ -52,63 +44,47 @@
                             <tbody class="center">
 
                                 <!-- VALIDA SI LA BUSQUEDA POR SEMANA ES NULA, SI LO ES MUESTRA TODOS LOS A1-->
-                                @if (is_null($numEntrada))
-                                    @foreach ($tramites['data'] as $tramite)
+                                @if (is_null($nombreChofer))
+                                    @foreach ($choferes['data'] as $chofer)
                                         <tr>
-                                            <td>{{ $tramite['numEntrada'] }}</td>
-                                            <td>{{ $tramite['factura'] }}</td>
-                                            <td>{{ $tramite['pedimentoRT'] }}</td>
-                                            <td>{{ $tramite['pedimentoA1'] }}</td>
-                                            <td>{{ $tramite['cliente'] }}</td>
-                                            <td>{{ $tramite['chofer'] }}</td>
-                                            <td>{{ $tramite['cellChofer'] }}</td>
-                                            <td>{{ $tramite['noLicenciaChofer'] }}</td>
-                                            <td>{{ $tramite['placa'] }}</td>
-                                            <td>{{ $tramite['economico'] }}</td>
-                                            <td>{{ $tramite['candados'] }}</td>
-                                            <td>{{ $tramite['numBultos'] }}</td>
-                                            <td>{{ $tramite['barcode'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($tramite['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
+                                            <td>{{ $chofer['nombre'] }}</td>
+                                            <td>{{ $chofer['fechaNacimiento'] }}</td>
+                                            <td>{{ $chofer['numCelular'] }}</td>
+                                            <td>{{ $chofer['noLicencia'] }}</td>
+                                            <td>{{ $chofer['noVisa'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($chofer['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($tramite['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
+                                            <td>{{ \Carbon\Carbon::parse($chofer['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat modal-trigger"
-                                                    href="/tramite/{{ $tramite['id'] }}" style="margin: auto"><i
+                                                    href="/chofer/{{ $chofer['id'] }}" style="margin: auto"><i
                                                         class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='deleteTramite({{ $tramite['id'] }})'><i
+                                                    wire:click='deleteChofer({{ $chofer['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @else
                                     <!--SI SEMANA NO ES NULA MUESTRA LOS PEDIMENTOS A1 ENCONTRADO-->
-                                    @foreach ($tramiteFound['data'] as $tramite)
+                                    @foreach ($choferFound['data'] as $chofer)
                                         <tr>
-                                            <td>{{ $tramite['numEntrada'] }}</td>
-                                            <td>{{ $tramite['factura'] }}</td>
-                                            <td>{{ $tramite['pedimentoRT'] }}</td>
-                                            <td>{{ $tramite['pedimentoA1'] }}</td>
-                                            <td>{{ $tramite['cliente'] }}</td>
-                                            <td>{{ $tramite['chofer'] }}</td>
-                                            <td>{{ $tramite['cellChofer'] }}</td>
-                                            <td>{{ $tramite['noLicenciaChofer'] }}</td>
-                                            <td>{{ $tramite['placa'] }}</td>
-                                            <td>{{ $tramite['economico'] }}</td>
-                                            <td>{{ $tramite['candados'] }}</td>
-                                            <td>{{ $tramite['numBultos'] }}</td>
-                                            <td>{{ $tramite['barcode'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($tramite['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
+                                            <td>{{ $chofer['nombre'] }}</td>
+                                            <td>{{ $chofer['fechaNacimiento'] }}</td>
+                                            <td>{{ $chofer['numCelular'] }}</td>
+                                            <td>{{ $chofer['noLicencia'] }}</td>
+                                            <td>{{ $chofer['noVisa'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($chofer['created_at'], 'America/Hermosillo')->format('d/m/y') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($tramite['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
+                                            <td>{{ \Carbon\Carbon::parse($chofer['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
                                             </td>
                                             <td style="display: flex">
-                                                <a class="btn btn-flat" style="margin: auto"
-                                                    href="/tramite/{{ $tramite['id'] }}"><i
+                                                <a class="btn btn-flat modal-trigger"
+                                                    href="/chofer/{{ $chofer['id'] }}" style="margin: auto"><i
                                                         class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
-                                                    wire:click='deleteTramite({{ $tramite['id'] }})'><i
+                                                    wire:click='deleteChofer({{ $chofer['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
                                             </td>
                                         </tr>
@@ -123,7 +99,7 @@
                     <ul class="pagination">
                         @php
                             //CREAMOS CUANTAS DIVISIONES TENDRA EL PAGINATE DIVIDIENDO EL TOTAL DE CLIENTES / LOS MOSTRADOS EN PANTALLA
-                            $totalPages = ceil($totalTramites / 10);
+                            $totalPages = ceil($totalChoferes / 10);
                         @endphp
                         @for ($i = 1; $i <= $totalPages; $i++)
                             <!--CREAMOS LOS BOTONES EN BASE A LOS NUMEROS DE REGISTROS CADA UNO CON LA AYUDA DE LA FUNCION NEXTSPAGES Y MANDANDO LA PAGINA A LA QUE NAVEGAREMOS-->
@@ -138,9 +114,9 @@
         </div>
 
         <!--Para que no se cierre modal-->
-        <div wire:ignore.self id="mi-modal" class="modal">
+        <div wire:ignore.self id="choferModal" class="modal">
             <div class="modal-content">
-                <h4>CREAR TRÁMITE</h4>
+                <h4>CREAR CHOFER</h4>
                 <form>
                     <div class="row">
                         <div class="input-field col s6">
@@ -150,12 +126,7 @@
                             <label for="numEntrada" class="active">Numero Entrada</label>
                         </div>
                         <div class="input-field col s6">
-                            <select class="form-select" wire:model.defer='dataTramite.cliente'>
-                                <option value=""> </option>
-                                @foreach ($clientsToFront as $clients)
-                                    <option value="{{ $clients['nombre'] }}">{{ $clients['nombre'] }}</option>
-                                @endforeach
-                            </select>
+                            <h1>1</h1>
                             <label for="cliente">Cliente</label>
                         </div>
                     </div>
@@ -173,37 +144,17 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <select class="red" wire:model.defer='dataTramite.pedimentoRT'>
-                                <option value=""> </option>
-                                @foreach ($pedimentosRTToFront as $pedimentoRT)
-                                    <option value="{{ $pedimentoRT['noPedimento'] }}">
-                                        {{ $pedimentoRT['noPedimento'] }}</option>
-                                @endforeach
-                            </select>
+                            <h1>2</h1>
                             <label for="pedimentoRT">Pedimento RT</label>
                         </div>
                         <div class="input-field col s6">
-                            <select class="form-select" wire:model.defer='dataTramite.pedimentoA1'>
-                                <option value="">Seleccionar</option>
-                                <option value="1111111">1111111</option>
-                                @foreach ($pedimentosA1ToFront as $pedimentoA1)
-                                    <option value="{{ $pedimentoA1['noPedimento'] }}">
-                                        {{ $pedimentoA1['noPedimento'] }}</option>
-                                @endforeach
-                            </select>
+                            <h1>3</h1>
                             <label for="pedimentoA1">Pedimento A1</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
-                            <select class="form-select" wire:model.defer='dataTramite.chofer'>
-                                <option value=""> </option>
-                                @foreach ($choferesToFront as $chofer)
-                                    <option value="{{ $chofer['id'] }}">
-                                        {{ $chofer['nombre'] }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <h1>4</h1>
                             <label for="chofer">Chofer</label>
                         </div>
 
@@ -232,3 +183,4 @@
             </div>
 
         </div>
+

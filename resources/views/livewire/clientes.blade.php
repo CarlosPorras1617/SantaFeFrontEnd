@@ -29,9 +29,9 @@
                                             <td>{{ $client['id'] }}</td>
                                             <td>{{ $client['nombre'] }}</td>
                                             <td>{{ $client['rfc'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($client['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($client['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($client['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($client['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat" style="margin: auto"
@@ -49,9 +49,9 @@
                                             <td>{{ $client['id'] }}</td>
                                             <td>{{ $client['nombre'] }}</td>
                                             <td>{{ $client['rfc'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($client['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($client['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($client['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($client['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat" style="margin: auto"
@@ -101,10 +101,10 @@
                             <div class="input-field campos">
                                 <label class="active"
                                     for="nombre">{{ $clientToUpdate ? $clientToUpdate['nombre'] : 'Nombre' }}</label>
-                                <input wire:model='dataClient.nombre' id="nombre" type="text">
+                                <input wire:model.defer='dataClient.nombre' id="nombre" type="text">
                             </div>
                             <div class="input-field campos">
-                                <input wire:model='dataClient.rfc' id="rfc" type="text"
+                                <input wire:model.defer='dataClient.rfc' id="rfc" type="text"
                                     value="{{ $clientToUpdate ? $clientToUpdate['rfc'] : ' ' }}">
                                 <label class="active"
                                     for="rfc">{{ $clientToUpdate ? $clientToUpdate['rfc'] : 'RFC' }}</label>

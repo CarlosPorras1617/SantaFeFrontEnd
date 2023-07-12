@@ -10,7 +10,7 @@
     <div class="contenidoHome center">
         <h1 class="titulos">INICIA TU TRÁMITE</h1>
         <div class="row">
-            <div class="col s12 m6 l3">
+            <a href="/choferes" class="col s12 m6 l3">
                 <div class="row cards">
                     <div class="card">
                         <div class="card-image">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
             <a href="pedimentosA1" class="col s12 m6 l3">
                 <div class="row cards">
                     <div class="card">

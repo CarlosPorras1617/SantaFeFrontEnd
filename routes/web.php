@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Livewire\ActualizarChofer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Clientes;
 use App\Http\Livewire\PedimentosA1;
 use App\Http\Livewire\PedimentosRt;
 use App\Http\Livewire\ActualizarTramite;
+use App\Http\Livewire\Choferes;
 use App\Http\Livewire\Tramites;
 use App\Http\Livewire\Home;
 /*
@@ -25,3 +27,5 @@ Route::get('/pedimentosA1', PedimentosA1::class);
 Route::get('/pedimentosRt', PedimentosRt::class);
 Route::get('/tramites', Tramites::class);
 Route::get('/tramite/{id}', ActualizarTramite::class);
+Route::get('/choferes', Choferes::class);
+Route::get('/chofer/{id}', ActualizarChofer::class);

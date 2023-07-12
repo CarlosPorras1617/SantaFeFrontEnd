@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="{{ asset('css/tramites.css') }}">
     <!--css actualizar Tramites-->
     <link rel="stylesheet" href="{{ asset('css/actualizarTramite.css') }}">
+    <!--css actualizar Choferes-->
+    <link rel="stylesheet" href="{{ asset('css/choferes.css') }}">
 
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -48,7 +50,7 @@
             <div class="contenedor">
                 <ul class="right hide-on-med-and-down list">
                     <li><a class="large material-icons" href="/">home</a></li>
-                    <li><a class="large material-icons">local_shipping</a></li>
+                    <li><a class="large material-icons" href="choferes">local_shipping</a></li>
                     <li><a class="large material-icons" href="pedimentosA1">assignment</a></li>
                     <li><a class="large material-icons" href="clientes">people</a></li>
                     <li><a class="large material-icons" href="tramites">add</a></li>

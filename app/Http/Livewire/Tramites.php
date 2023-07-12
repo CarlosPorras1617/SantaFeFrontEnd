@@ -12,11 +12,9 @@ class Tramites extends Component
     //cualquier cambio de variable en esta parte, ejecuta la funcion de render y se actualzian los datos
     public $currentPage = 1;
     public $idTramite;
-    public $tramiteToUpdate = [];
     public $dataTramite = [];
     public $APIerrors =  [];
     public $numEntrada = null;
-    public $errorCodigo = 0;
     public $tramites = [];
 
     public function render()
@@ -119,7 +117,6 @@ class Tramites extends Component
         $response = Http::withHeaders(['Accept' => 'Application/son'])->post('http://127.0.0.1:8000/api/tramites', $this->dataTramite);
         if ($response->successful()) {
             $this->dataTramite = [];
-            $this->tramiteToUpdate = [];
             $this->APIerrors = [];
             redirect('/tramites');
         } else {

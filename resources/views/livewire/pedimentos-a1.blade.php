@@ -56,9 +56,9 @@
                                             <td>{{ $pedimentoA1['semana'] }}</td>
                                             <td>{{ $pedimentoA1['patente'] }}</td>
                                             <td>{{ $pedimentoA1['noPedimento'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat" style="margin: auto"
@@ -78,9 +78,9 @@
                                             <td>{{ $pedimentoA1['semana'] }}</td>
                                             <td>{{ $pedimentoA1['patente'] }}</td>
                                             <td>{{ $pedimentoA1['noPedimento'] }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['created_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
-                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['updated_at'], 'America/Hermosillo')->format('d/m/y') }}
+                                            <td>{{ \Carbon\Carbon::parse($pedimentoA1['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
                                             <td style="display: flex">
                                                 <a class="btn btn-flat" style="margin: auto"
@@ -129,17 +129,17 @@
                             <div class="input-field campos">
                                 <label class="active"
                                     for="semana">{{ $pedimentoA1ToUpdate ? $pedimentoA1ToUpdate['semana'] : 'Semana' }}</label>
-                                <input wire:model='dataPedimentoA1.semana' id="semana" type="number">
+                                <input wire:model.defer='dataPedimentoA1.semana' id="semana" type="number">
                             </div>
                             <div class="input-field campos">
-                                <input wire:model='dataPedimentoA1.patente' id="patente" type="number">
+                                <input wire:model.defer='dataPedimentoA1.patente' id="patente" type="number">
                                 <label class="active"
                                     for="rfc">{{ $pedimentoA1ToUpdate ? $pedimentoA1ToUpdate['patente'] : 'Patente' }}</label>
                             </div>
                             <div class="input-field campos">
                                 <label class="active"
                                     for="noPedimento">{{ $pedimentoA1ToUpdate ? $pedimentoA1ToUpdate['noPedimento'] : 'No. Pedimento' }}</label>
-                                <input type="number" id="noPedimento" wire:model='dataPedimentoA1.noPedimento'>
+                                <input type="number" id="noPedimento" wire:model.defer='dataPedimentoA1.noPedimento'>
                             </div>
 
                             <!--CREAR CLIENTE-->

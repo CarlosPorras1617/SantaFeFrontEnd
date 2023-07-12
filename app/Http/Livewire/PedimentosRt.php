@@ -100,6 +100,7 @@ class PedimentosRt extends Component
     {
         $response = Http::withHeaders(['Accept' => 'Application/son'])->post('http://127.0.0.1:8000/api/pedimentort', $this->dataPedimentoRT);
         if ($response->successful()) {
+            redirect('/pedimentosRt');
             $this->dataPedimentoRT = [];
             $this->pedimentoRTToUpdate = [];
             $this->APIerrors = [];

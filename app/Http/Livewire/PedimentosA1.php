@@ -119,6 +119,7 @@ class PedimentosA1 extends Component
         if ($response->successful()) {
             $this->dataPedimentoA1 = [];
             $this->APIerrors = [];
+            redirect('/pedimentosA1');
         } else {
             $responseData = $response->json();
             if (isset($responseData['message'])) {

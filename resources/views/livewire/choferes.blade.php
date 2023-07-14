@@ -57,9 +57,8 @@
                                             <td>{{ \Carbon\Carbon::parse($chofer['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
                                             <td style="display: flex">
-                                                <a class="btn btn-flat modal-trigger"
-                                                    href="/chofer/{{ $chofer['id'] }}" style="margin: auto"><i
-                                                        class="large material-icons">create</i></a>
+                                                <a class="btn btn-flat modal-trigger" href="/chofer/{{ $chofer['id'] }}"
+                                                    style="margin: auto"><i class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
                                                     wire:click='deleteChofer({{ $chofer['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
@@ -121,66 +120,47 @@
                     <div class="row">
                         <div class="input-field col s6">
                             <!--Defer para que no se quite el character counter--->
-                            <input id="numEntrada" type="number" wire:model.defer='dataTramite.numEntrada'
-                                class="validate" data-length="11">
-                            <label for="numEntrada" class="active">Numero Entrada</label>
+                            <input id="nombreChofer" type="text" wire:model.defer='dataChofer.nombre'
+                                class="validate">
+                            <label for="nombreChofer" class="active">Nombre Completo</label>
                         </div>
                         <div class="input-field col s6">
-                            <h1>1</h1>
-                            <label for="cliente">Cliente</label>
+                            <input id="fechaNacimiento" type="date" wire:model.defer='dataChofer.fechaNacimiento'
+                                class="validate">
+                            <label for="fechaNacimiento">Fecha Nacimiento</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="candados" type="text" wire:model.defer='dataTramite.candados'
+                            <input id="numCelular" type="number" wire:model.defer='dataChofer.numCelular'
                                 class="validate">
-                            <label for="candados">Candados</label>
+                            <label for="numCelular">Num Celular</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="factura" type="text" wire:model.defer='dataTramite.factura'
+                            <input id="noLicencia" type="text" wire:model.defer='dataChofer.noLicencia'
                                 class="validate">
-                            <label for="factura">Factura</label>
+                            <label for="noLicencia">Licencia</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <h1>2</h1>
-                            <label for="pedimentoRT">Pedimento RT</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <h1>3</h1>
-                            <label for="pedimentoA1">Pedimento A1</label>
+                            <input id="noVisa" type="text" wire:model.defer='dataChofer.noVisa' class="validate">
+                            <label for="noVisa">Visa</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s3">
-                            <h1>4</h1>
-                            <label for="chofer">Chofer</label>
-                        </div>
-
-                        <div class="input-field col s3">
-                            <input id="bultos" type="text" wire:model.defer='dataTramite.numBultos'
-                                class="validate">
-                            <label for="bultos">Bultos</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input id="placa" type="text" wire:model.defer='dataTramite.placa'
-                                class="validate">
-                            <label for="placa">Placa</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input id="economico" type="text" wire:model.defer='dataTramite.economico'
-                                class="validate">
-                            <label for="economico">Economico</label>
-                        </div>
-
-                    </div>
+                    @if ($APIerrors)
+                        @foreach ($APIerrors as $error)
+                            @foreach ($error as $errorMessage)
+                                <h6>{{ $errorMessage }}</h6>
+                                <div class="divider"></div>
+                            @endforeach
+                        @endforeach
+                    @endif
                 </form>
                 <div class="modal-footer">
-                    <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-                    <a wire:click='createTramite' class="btn pedimentoA1FormButton">CREAR</a>
+                    <a class="modal-close waves-effect waves-green btn-flat red lighten-1 white-text">Cerrar</a>
+                    <a wire:click='createChofer' class="btn pedimentoA1FormButton">CREAR</a>
                 </div>
             </div>
 
         </div>
-

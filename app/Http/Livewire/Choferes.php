@@ -78,4 +78,32 @@ class Choferes extends Component
             redirect('/choferes');
         }
     }
+
+    public function createChofer()
+    {
+        //valida los campos si no lo inserta como en el back
+        $camposParaValidar = ['fechaNacimiento', 'numCelular', 'noVisa'];
+        foreach($camposParaValidar as $campo){
+            if (!array_key_exists($campo, $this->dataChofer)) {
+                $nuevosCampos = [
+                    $campo => "",
+                ];
+                $this->dataChofer = array_merge($nuevosCampos, $this->dataChofer);
+            }
+        }
+        $response = Http::withHeaders(['Accept' => 'Application/son'])->post('http://127.0.0.1:8000/api/chofer', $this->dataChofer);
+        if ($response->successful()) {
+            $this->dataChofer = [];
+            $this->APIerrors = [];
+            redirect('/choferes');
+        } else {
+            $responseData = $response->json();
+            if (isset($responseData['message'])) {
+                $this->APIerrors = $responseData['message'];
+                //dd($this->APIerrors);
+            } else {
+                $this->APIerrors = 'Error desconocido en la respuesta del API.';
+            }
+        }
+    }
 }

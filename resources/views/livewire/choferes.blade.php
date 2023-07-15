@@ -4,7 +4,7 @@
         <!--CONTENEDOR CENTRAL DE LA PAGINA-->
         <div class="contenedorPedimentosA1">
 
-            <!--CONTENEDOR DE BOTONES DE NAVEGACION ENTRE PEDIMENTOS-->
+            <!--CONTENEDOR DE BOTONES DE NAVEGACION ENTRE CHOFER-->
             <div class="fondoBuscarNumEntrada"></div>
             <div class="floatingActionButtonCrearTramite">
                 <a class="waves-effect waves-light btn modal-trigger CrearTramite" href="#choferModal"><i

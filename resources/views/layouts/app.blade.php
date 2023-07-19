@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{ asset('css/actualizarTramite.css') }}">
     <!--css actualizar Choferes-->
     <link rel="stylesheet" href="{{ asset('css/choferes.css') }}">
+    <!--css capturar Tramite-->
+    <link rel="stylesheet" href="{{ asset('css/capturarTramite.css') }}">
 
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -49,6 +51,7 @@
             <img class="brand-logo center" src="{{ asset('images/AgenciaSantaFeLogo.png') }}">
             <div class="contenedor">
                 <ul class="right hide-on-med-and-down list">
+                    <li><a class="large material-icons" href="/capturar">assignment_turned_in</a></li>
                     <li><a class="large material-icons" href="/">home</a></li>
                     <li><a class="large material-icons" href="choferes">local_shipping</a></li>
                     <li><a class="large material-icons" href="pedimentosA1">assignment</a></li>

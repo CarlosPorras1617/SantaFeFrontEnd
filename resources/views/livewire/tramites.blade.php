@@ -52,7 +52,7 @@
                             <tbody class="center">
 
                                 <!-- VALIDA SI LA BUSQUEDA POR SEMANA ES NULA, SI LO ES MUESTRA TODOS LOS A1-->
-                                @if (is_null($numEntrada))
+                                @if (is_null($numEntrada) || $numEntrada == '')
                                     @foreach ($tramites['data'] as $tramite)
                                         <tr>
                                             <td>{{ $tramite['numEntrada'] }}</td>
@@ -82,6 +82,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
                                 @else
                                     <!--SI SEMANA NO ES NULA MUESTRA LOS PEDIMENTOS A1 ENCONTRADO-->
                                     @foreach ($tramiteFound['data'] as $tramite)

@@ -1,0 +1,18 @@
+:root{
+    --color-icons-inactive: #ba9695;
+    --color-fondo: #752E2B;
+    --color-paginate-active:#E4DDDD;
+    --color-paginate-inactive: #AD7A78;
+    --color-rows-tablas:#DDC4C4;
+}
+.capturar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    top:80px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+    background-color: var(--color-paginate-active);
+}

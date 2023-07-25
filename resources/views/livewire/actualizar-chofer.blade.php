@@ -17,13 +17,13 @@
                 <div class="input-field col s6">
                     <input id="fechaNacimiento" type="date" wire:model.defer='datosModificarChofer.fechaNacimiento'
                         class="validate">
-                    <label for="fechaNacimiento">Nacimiento: {{ $chofer['fechaNacimiento'] }}</label>
+                    <label for="fechaNacimiento">Nacimiento: {{ $chofer['fechaNacimiento'] == '1900-01-01' ? 'NA' : $chofer['fechaNacimiento'] }}</label>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="numCelular" type="number" wire:model.defer='datosModificarChofer.numCelular'
                             class="validate">
-                        <label for="numCelular">Celular: {{ $chofer['numCelular'] }}</label>
+                        <label for="numCelular">Celular: {{ $chofer['numCelular'] == 0 ? "NA" : $chofer['numCelular'] }}</label>
                     </div>
                     <div class="input-field col s6">
                         <input id="noLicencia" type="text" wire:model.defer='datosModificarChofer.noLicencia'
@@ -67,5 +67,6 @@
             </div>
         </div>
         <a class="btn pedimentoRTFormButton" wire:click='actualizarChofer()'>ACTUALIZAR</a>
+        <a class="btn pedimentoRTFormButton" href="/choferes">REGRESAR</a>
     </form>
 </div>

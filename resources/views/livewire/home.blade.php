@@ -182,7 +182,7 @@
             const fechaDeRecogido = formatTimestamp(cargando.updated_at);
             //verificar si vino por el tramite
             if (cargando.status == 1) {
-                actualizado.innerHTML = '<h5>Actualizado</h5><br>' + 'Pendiente';
+                actualizado.innerHTML = '<h5>Estatus</h5><br>' + 'Pendiente';
             }
             if (cargando.status == 0) {
                 actualizado.innerHTML = '<h5>Estatus</h5><br>' + 'Recogido <br>' + fechaDeRecogido;

@@ -39,12 +39,7 @@ class ActualizarTramite extends Component
         $respuesta = Http::get('http://127.0.0.1:8000/api/tramite/' . $this->idTramite);
         if ($respuesta->successful()) {
             $tramite = $respuesta->json();
-            //obtener nombre chofer
-            $getDataChofer = Http::get('http://127.0.0.1:8000/api/chofer/' . $tramite['id']);
-            if ($getDataChofer->successful()) {
-                $choferJson = $getDataChofer->json();
-                $nombreChofer = $choferJson['nombre'];
-            }
+            $nombreChofer = $tramite['chofer'];
 
         } else {
             dd('error');

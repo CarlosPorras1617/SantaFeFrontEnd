@@ -10,6 +10,8 @@ use App\Http\Livewire\CapturarTramite;
 use App\Http\Livewire\Choferes;
 use App\Http\Livewire\Tramites;
 use App\Http\Livewire\Home;
+use App\Http\Livewire\TramitesRecogidos;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +33,4 @@ Route::get('/tramite/{id}', ActualizarTramite::class);
 Route::get('/choferes', Choferes::class);
 Route::get('/chofer/{id}', ActualizarChofer::class);
 Route::get('/capturar', CapturarTramite::class);
+Route::get('/tramitesRecogidos', TramitesRecogidos::class);

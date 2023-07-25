@@ -7,10 +7,9 @@
             <!--CONTENEDOR DE BOTONES DE NAVEGACION ENTRE PEDIMENTOS-->
             <div class="navegacionTramites">
                 <div class="row">
-                    <a href="tramites" id="tramitesNavegacion" class="btn botonPedimentos"
-                        style="margin-right: 10px;">Tramites Pendientes</a>
-                    <a href="tramitesRecogidos" class="btn botonPedimentos" style="margin-left: 10px;"">Tramites
-                        Recogidos</a>
+                    <a href="tramites" class="btn botonPedimentos" style="margin-right: 10px;">Tramites Pendientes</a>
+                    <a href="tramitesRecogidos" id="tramitesNavegacion" class="btn botonPedimentos"
+                        style="margin-left: 10px;"">Tramites Recogidos</a>
 
                     <!--SCRIPT QUE VERIFICA EN QUE URL ESTAMOS Y CAMBIA COLOR DE BOTON-->
                     <script>
@@ -22,7 +21,7 @@
                             // Obtener el botón por su ID
                             var boton = document.getElementById('tramitesNavegacion');
                             // Verificar la URL y aplicar el color correspondiente al botón
-                            if (url.includes('tramites')) {
+                            if (url.includes('tramitesRecogidos')) {
                                 boton.style.backgroundColor = '#E4DDDD';
                             }
                         }
@@ -32,10 +31,6 @@
 
             <!--CONTENEDOR DE BOTONES DE NAVEGACION ENTRE PEDIMENTOS-->
             <div class="fondoBuscarNumEntrada"></div>
-            <div class="floatingActionButtonCrearTramite">
-                <a class="waves-effect waves-light btn modal-trigger CrearTramite" href="#mi-modal"><i
-                        class="material-icons tramites right">control_point</i>Crear Trámite</a>
-            </div>
             <div class="buscarByNumEntradaInput">
                 <div class="row">
                     <!---BARRA BUSQUEDA-->
@@ -71,7 +66,7 @@
                                     <th>NumBultos</th>
                                     <th>Barcode</th>
                                     <th>Creado</th>
-                                    <th>Actualizado</th>
+                                    <th>Recogido</th>
                                     <th style="width: 80px">Acciones</th>
                                 </tr>
                             </thead>
@@ -100,9 +95,6 @@
                                             <td>{{ \Carbon\Carbon::parse($tramite['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                             </td>
                                             <td style="display: flex">
-                                                <a class="btn btn-flat modal-trigger"
-                                                    href="/tramite/{{ $tramite['id'] }}" style="margin: auto"><i
-                                                        class="large material-icons">create</i></a>
                                                 <a class="btn btn-flat" style="margin: auto"
                                                     wire:click='deleteTramite({{ $tramite['id'] }})'><i
                                                         class="large material-icons">delete</i> </button>
@@ -113,7 +105,7 @@
                                     <!--SI SEMANA NO ES NULA MUESTRA LOS PEDIMENTOS A1 ENCONTRADO-->
                                     @foreach ($tramiteFound['data'] as $tramite)
                                         <tr>
-                                            @if ($tramite['status'] == 0)
+                                            @if ($tramite['status'] == 1)
                                                 <td>{{ $tramite['numEntrada'] }}</td>
                                                 <td>{{ $tramite['factura'] }}</td>
                                                 <td>{{ $tramite['pedimentoRT'] }}</td>
@@ -131,7 +123,7 @@
                                                 <td>{{ $tramite['barcode'] }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($tramite['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                                 </td>
-                                                <td style="font-weight: bold">Recogido
+                                                <td style="font-weight: bold">PENDIENTE RECOGER
                                                 </td>
                                                 <td style="display: flex">
                                                     <a class="btn btn-flat" style="margin: auto"
@@ -141,7 +133,7 @@
                                                         wire:click='deleteTramite({{ $tramite['id'] }})'><i
                                                             class="large material-icons">delete</i> </button>
                                                 </td>
-                                            @else
+                                                @else
                                                 <td>{{ $tramite['numEntrada'] }}</td>
                                                 <td>{{ $tramite['factura'] }}</td>
                                                 <td>{{ $tramite['pedimentoRT'] }}</td>
@@ -159,8 +151,7 @@
                                                 <td>{{ $tramite['barcode'] }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($tramite['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
                                                 </td>
-                                                <td>{{ \Carbon\Carbon::parse($tramite['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
-                                                </td>
+                                                <td>{{\Carbon\Carbon::parse($tramite['updated_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm')}}</td>
                                                 <td style="display: flex">
                                                     <a class="btn btn-flat" style="margin: auto"
                                                         href="/tramite/{{ $tramite['id'] }}"><i
@@ -170,7 +161,6 @@
                                                             class="large material-icons">delete</i> </button>
                                                 </td>
                                             @endif
-                                        </tr>
                                     @endforeach
                                 @endif
                             </tbody>
@@ -194,100 +184,4 @@
                     </ul>
                 </div>
             </div>
-        </div>
-
-        <!--Para que no se cierre modal-->
-        <div wire:ignore.self id="mi-modal" class="modal">
-            <div class="modal-content">
-                <h4>CREAR TRÁMITE</h4>
-                <form>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <!--Defer para que no se quite el character counter--->
-                            <input id="numEntrada" type="number" wire:model.defer='dataTramite.numEntrada'
-                                class="validate" data-length="11">
-                            <label for="numEntrada" class="active">Numero Entrada</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <select class="form-select" wire:model.defer='dataTramite.cliente'>
-                                <option value=""> </option>
-                                @foreach ($clientsToFront as $clients)
-                                    <option value="{{ $clients['nombre'] }}">{{ $clients['nombre'] }}</option>
-                                @endforeach
-                            </select>
-                            <label for="cliente">Cliente</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="candados" type="text" wire:model.defer='dataTramite.candados'
-                                class="validate">
-                            <label for="candados">Candados</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="factura" type="text" wire:model.defer='dataTramite.factura'
-                                class="validate">
-                            <label for="factura">Factura</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <select class="red" wire:model.defer='dataTramite.pedimentoRT'>
-                                <option value=""> </option>
-                                @foreach ($pedimentosRTToFront as $pedimentoRT)
-                                    <option value="{{ $pedimentoRT['noPedimento'] }}">
-                                        {{ $pedimentoRT['noPedimento'] }}</option>
-                                @endforeach
-                            </select>
-                            <label for="pedimentoRT">Pedimento RT</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <select class="form-select" wire:model.defer='dataTramite.pedimentoA1'>
-                                <option value="">Seleccionar</option>
-                                <option value="1111111">NA</option>
-                                @foreach ($pedimentosA1ToFront as $pedimentoA1)
-                                    <option value="{{ $pedimentoA1['noPedimento'] }}">
-                                        {{ $pedimentoA1['noPedimento'] }}</option>
-                                @endforeach
-                            </select>
-                            <label for="pedimentoA1">Pedimento A1</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s3">
-                            <select class="form-select" wire:model.defer='dataTramite.chofer'>
-                                <option value=""> </option>
-                                @foreach ($choferesToFront as $chofer)
-                                    <option value="{{ $chofer['id'] }}">
-                                        {{ $chofer['nombre'] }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <label for="chofer">Chofer</label>
-                        </div>
-
-                        <div class="input-field col s3">
-                            <input id="bultos" type="text" wire:model.defer='dataTramite.numBultos'
-                                class="validate">
-                            <label for="bultos">Bultos</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input id="placa" type="text" wire:model.defer='dataTramite.placa'
-                                class="validate">
-                            <label for="placa">Placa</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <input id="economico" type="text" wire:model.defer='dataTramite.economico'
-                                class="validate">
-                            <label for="economico">Economico</label>
-                        </div>
-
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-                    <a wire:click='createTramite' class="btn pedimentoA1FormButton">CREAR</a>
-                </div>
-            </div>
-
         </div>

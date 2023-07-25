@@ -61,4 +61,10 @@
 }
 .select-dropdown {
     height: 200px;
-  }
+}
+
+.navegacionTramites{
+    position: absolute;
+    top: -55px;
+    left: 400px;
+}

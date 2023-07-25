@@ -51,7 +51,7 @@ class Tramites extends Component
                 $promise2 = $client->getAsync('http://127.0.0.1:8000/api/tramites/activos?page=' . $this->currentPage);
                 $response2 = $promise2->wait();
 
-                $promise = $client->getAsync('http://127.0.0.1:8000/api/tramites');
+                $promise = $client->getAsync('http://127.0.0.1:8000/api/tramites/todosActivos');
                 $response = $promise->wait();
 
                 $data = $response->getBody()->getContents();
@@ -60,6 +60,7 @@ class Tramites extends Component
 
                 $data2 = $response2->getBody()->getContents();
                 $this->tramites = json_decode($data2, true);
+                //$totalTramites = count($this->tramites['data']);
                 $currentpage = $this->tramites['current_page'];
                 break;
             } catch (RequestException $exception) {

@@ -13,7 +13,8 @@
                         <select wire:ignore.self class="form-select" wire:model.defer='datosModificarTramite.cliente'>
                             <option value=""> </option>
                             @foreach ($clientsToFront as $clients)
-                                <option wire:ignore.self value="{{ $clients['nombre'] }}">{{ $clients['nombre'] }}</option>
+                                <option wire:ignore.self value="{{ $clients['nombre'] }}">{{ $clients['nombre'] }}
+                                </option>
                             @endforeach
                         </select>
                         <label for="cliente">Cliente: {{ $tramite['cliente'] }}</label>
@@ -44,7 +45,8 @@
                     </div>
                     <div class="input-field col s6">
                         <select class="form-select" wire:model.defer='datosModificarTramite.pedimentoA1'>
-                            <option value="0000000">0000000</option>
+                            <option value="">Seleccionar</option>
+                            <option value="1111111">NA</option>
                             @foreach ($pedimentosA1ToFront as $pedimentoA1)
                                 <option value="{{ $pedimentoA1['noPedimento'] }}">
                                     {{ $pedimentoA1['noPedimento'] }}</option>
@@ -105,12 +107,13 @@
                                 @endforeach
                             @endforeach
                             <br>
-                            <a class="btn pedimentoRTFormButton" href="/tramite/{{$tramite['id']}}">REINTENTAR</a>
+                            <a class="btn pedimentoRTFormButton" href="/tramite/{{ $tramite['id'] }}">REINTENTAR</a>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
         <a class="btn pedimentoRTFormButton" wire:click='actualizarTramite()'>ACTUALIZAR</a>
+        <a class="btn pedimentoRTFormButton" href="/tramites">REGRESAR</a>
     </form>
 </div>

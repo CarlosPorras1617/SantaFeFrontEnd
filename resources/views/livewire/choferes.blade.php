@@ -48,8 +48,8 @@
                                     @foreach ($choferes['data'] as $chofer)
                                         <tr>
                                             <td>{{ $chofer['nombre'] }}</td>
-                                            <td>{{ $chofer['fechaNacimiento'] }}</td>
-                                            <td>{{ $chofer['numCelular'] }}</td>
+                                            <td>{{ $chofer['fechaNacimiento'] == '1900-01-01' ? 'NA' : $chofer['fechaNacimiento'] }}</td>
+                                            <td>{{ $chofer['numCelular'] == 0 ? "NA" : $chofer['numCelular']}}</td>
                                             <td>{{ $chofer['noLicencia'] }}</td>
                                             <td>{{ $chofer['noVisa'] }}</td>
                                             <td>{{ \Carbon\Carbon::parse($chofer['created_at'])->tz('America/Hermosillo')->isoFormat('dddd D MMMM YYYY HH:mm') }}
@@ -70,8 +70,8 @@
                                     @foreach ($choferFound['data'] as $chofer)
                                         <tr>
                                             <td>{{ $chofer['nombre'] }}</td>
-                                            <td>{{ $chofer['fechaNacimiento'] }}</td>
-                                            <td>{{ $chofer['numCelular'] }}</td>
+                                            <td>{{ $chofer['fechaNacimiento'] == '1900-01-01' ? 'NA' : $chofer['fechaNacimiento'] }}</td>
+                                            <td>{{ $chofer['numCelular'] == 0 ? "NA" : $chofer['numCelular']}}</td>
                                             <td>{{ $chofer['noLicencia'] }}</td>
                                             <td>{{ $chofer['noVisa'] }}</td>
                                             <td>{{ \Carbon\Carbon::parse($chofer['created_at'], 'America/Hermosillo')->format('d/m/y') }}
